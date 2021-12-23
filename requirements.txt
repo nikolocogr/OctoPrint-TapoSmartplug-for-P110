@@ -6,5 +6,5 @@
 # works as expected. Requirements can be found in setup.py.
 ###
 
-.
 uptime
+PyP100>=0.0.13

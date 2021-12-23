@@ -33,7 +33,7 @@ plugin_url = "https://github.com/Tyfy/OctoPrint-TapoSmartplug"
 plugin_license = "AGPLv3"
 
 # Any additional requirements besides OctoPrint should be listed here
-plugin_requires = ["uptime","PyP100"]
+plugin_requires = ["uptime","PyP100>=0.0.13"]
 
 ### --------------------------------------------------------------------------------------------------------------------
 ### More advanced options that you usually shouldn't have to touch follow after this point
