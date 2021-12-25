@@ -345,7 +345,7 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 
 		p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
 
-		p100.handshake() #Creates the cookies required for further methods 
+		p100.handshake() #Creates the cookies required for further methods
 		p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
 
 		p100.turnOn() #Sends the turn on request
@@ -384,7 +384,7 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 
 		p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
 
-		p100.handshake() #Creates the cookies required for further methods 
+		p100.handshake() #Creates the cookies required for further methods
 		p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
 
 		p100.turnOff() #Sends the turn on request
@@ -405,11 +405,11 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 			plug = self.plug_search(self._settings.get(["arrSmartplugs"]), "ip", plugip)
 
 			p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
-			p100.handshake() #Creates the cookies required for further methods 
+			p100.handshake() #Creates the cookies required for further methods
 			p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
 			response = p100.getDeviceInfo() #Returns dict with all the device info
 
-			chk = self.lookup(json.loads(response), *["result", "device_on"])
+			chk = self.lookup(response, *["result", "device_on"])
 
 			self._taposmartplug_logger.debug(chk)
 
