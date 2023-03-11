@@ -20,7 +20,7 @@ from uptime import uptime
 from datetime import datetime
 from struct import unpack
 from builtins import bytes
-from PyP100 import PyP100
+from PyP100 import PyP110
 
 try:
 	from octoprint.util import ResettableTimer
@@ -343,12 +343,12 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 		plug_ip = plugip
 		plug_num = -1
 
-		p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
+		p110 = PyP110.P110(plug["ip"], plug["username"], plug["password"]) #Creating a P110 plug object
 
-		p100.handshake() #Creates the cookies required for further methods
-		p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
+		p110.handshake() #Creates the cookies required for further methods
+		p110.login() #Sends credentials to the plug and creates AES Key and IV for further methods
 
-		p100.turnOn() #Sends the turn on request
+		p110.turnOn() #Sends the turn on request
 
 		if plug["autoConnect"] and self._printer.is_closed_or_error():
 			c = threading.Timer(int(plug["autoConnectDelay"]), self._printer.connect)
@@ -382,12 +382,12 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 			self._printer.disconnect()
 			time.sleep(int(plug["autoDisconnectDelay"]))
 
-		p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
+		p110 = PyP110.P110(plug["ip"], plug["username"], plug["password"]) #Creating a P110 plug object
 
-		p100.handshake() #Creates the cookies required for further methods
-		p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
+		p110.handshake() #Creates the cookies required for further methods
+		p110.login() #Sends credentials to the plug and creates AES Key and IV for further methods
 
-		p100.turnOff() #Sends the turn on request
+		p110.turnOff() #Sends the turn on request
 
 		self._stop_idle_timer()
 		return self.check_status(plugip)
@@ -404,10 +404,10 @@ class taposmartplugPlugin(octoprint.plugin.SettingsPlugin,
 
 			plug = self.plug_search(self._settings.get(["arrSmartplugs"]), "ip", plugip)
 
-			p100 = PyP100.P100(plug["ip"], plug["username"], plug["password"]) #Creating a P100 plug object
-			p100.handshake() #Creates the cookies required for further methods
-			p100.login() #Sends credentials to the plug and creates AES Key and IV for further methods
-			response = p100.getDeviceInfo() #Returns dict with all the device info
+			p110 = PyP110.P110(plug["ip"], plug["username"], plug["password"]) #Creating a P110 plug object
+			p110.handshake() #Creates the cookies required for further methods
+			p110.login() #Sends credentials to the plug and creates AES Key and IV for further methods
+			response = p110.getDeviceInfo() #Returns dict with all the device info
 
 			chk = self.lookup(response, *["result", "device_on"])
 
